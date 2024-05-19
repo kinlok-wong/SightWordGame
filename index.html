@@ -204,13 +204,16 @@
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="container-lg">
     <div id="menuBtn" class="fixed-top" role="button" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas"
       aria-controls="menuCanvas">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="bi bi-list" viewBox="0 0 16 16">
         <path fill-rule="evenodd"
           d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
       </svg>
+    </div>
+    <div class="card-container">
+      <!-- Cards will be generated dynamically -->
     </div>
   </div>
   <div class="fixed-bottom button-container">
@@ -224,9 +227,6 @@
       <path
         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
     </svg></button>
-  </div>
-  <div class="card-container">
-    <!-- Cards will be generated dynamically -->
   </div>
   <!-- svg icon -->
   <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="green" class="bi bi-check-circle checkIcon d-none" viewBox="0 0 16 16">
@@ -843,9 +843,11 @@
       showHideButton(speakBtn, "hide");
       var repeatBtn = document.getElementById("repeatBtn");
       showHideButton(repeatBtn, "hide");
+      pauseCards = true;
       msg.onend = function (event) {
         showHideButton(speakBtn, "show");
         showHideButton(repeatBtn, "show");
+        pauseCards = false;
       }
     }
 
@@ -861,6 +863,9 @@
       flippedCards = [];
       pauseCards = false;
       playClick = false;
+
+      var repeatBtn = document.getElementById("repeatBtn");
+      showHideButton(repeatBtn, "hide");
 
       // Clear existing cards
       const cardContainer = document.querySelector('.card-container');
